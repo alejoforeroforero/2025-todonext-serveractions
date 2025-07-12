@@ -1,7 +1,7 @@
 services:
   todoDB:
     image: postgres:15.3
-    container_name: todo-next-db
+    container_name: todo-db
     restart: always
     ports:
       - ${POSTGRES_PORT}:5432
