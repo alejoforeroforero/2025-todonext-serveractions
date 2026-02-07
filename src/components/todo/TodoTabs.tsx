@@ -4,6 +4,7 @@ import { Category, Todo } from "@/generated/prisma";
 import { TodoList } from "./TodoList";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Card } from "@heroui/react";
 
 interface TodoTabsProps {
   initialTodos: (Todo & { categories: Category[] })[];
@@ -15,16 +16,14 @@ export const TodoTabs = ({ initialTodos, categories, showTodoList = true }: Todo
   const pathname = usePathname();
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
-      {/* Tabs */}
+    <Card>
       <div className="border-b border-gray-200 dark:border-gray-700">
         <nav className="flex space-x-8 px-6 overflow-x-auto" aria-label="Tabs">
-          {/* All Todos Tab */}
           <Link
             href="/"
             className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 whitespace-nowrap ${
               pathname === "/"
-                ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                ? "border-purple-500 text-purple-600 dark:text-purple-400"
                 : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
             }`}
           >
@@ -34,13 +33,11 @@ export const TodoTabs = ({ initialTodos, categories, showTodoList = true }: Todo
             </span>
           </Link>
 
-          {/* Category Tabs */}
           {categories.map((category) => {
-            const categoryTodoCount = initialTodos.filter(todo => 
+            const categoryTodoCount = initialTodos.filter(todo =>
               todo.categories.some(cat => cat.id === category.id)
             ).length;
-            
-            // Use slug if available, otherwise fall back to id
+
             const categoryPath = category.slug ? `/category/${category.slug}` : `/category/${category.id}`;
             const isActive = pathname === categoryPath;
 
@@ -50,7 +47,7 @@ export const TodoTabs = ({ initialTodos, categories, showTodoList = true }: Todo
                 href={categoryPath}
                 className={`py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200 whitespace-nowrap ${
                   isActive
-                    ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                    ? "border-purple-500 text-purple-600 dark:text-purple-400"
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300"
                 }`}
               >
@@ -64,12 +61,11 @@ export const TodoTabs = ({ initialTodos, categories, showTodoList = true }: Todo
         </nav>
       </div>
 
-      {/* Tab Content */}
       {showTodoList && (
-        <div className="p-6">
+        <Card.Content>
           <TodoList initialTodos={initialTodos} />
-        </div>
+        </Card.Content>
       )}
-    </div>
+    </Card>
   );
-}; 
+};

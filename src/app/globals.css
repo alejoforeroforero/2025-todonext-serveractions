@@ -1,8 +1,27 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --accent: oklch(0.55 0.25 280);
+  --accent-foreground: oklch(0.98 0 0);
+  --background: #f8f9fa;
+  --foreground: #1a1a2e;
+
+  --heroui-foreground: #1a1a2e;
+  --heroui-default-foreground: #374151;
+  --heroui-content1: #ffffff;
+  --heroui-content2: #f3f4f6;
+  --heroui-content3: #e5e7eb;
+  --heroui-content4: #d1d5db;
+  --heroui-default-100: #f3f4f6;
+  --heroui-default-200: #e5e7eb;
+  --heroui-default-300: #d1d5db;
+  --heroui-default-400: #9ca3af;
+  --heroui-default-500: #6b7280;
+  --heroui-default-600: #4b5563;
+  --heroui-default-700: #374151;
+  --heroui-default-800: #1f2937;
+  --heroui-default-900: #111827;
 }
 
 @theme inline {
@@ -23,4 +42,30 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.card [data-slot="title"],
+.card [data-slot="header"] {
+  color: #1a1a2e;
+}
+
+[data-slot="label"],
+label {
+  color: #374151;
+  font-weight: 500;
+}
+
+[data-slot="input"],
+input {
+  color: #1a1a2e;
+  border-color: #d1d5db;
+}
+
+[data-slot="input"]::placeholder,
+input::placeholder {
+  color: #9ca3af;
+}
+
+.checkbox [data-slot="control"] {
+  border-color: #9ca3af;
 }
