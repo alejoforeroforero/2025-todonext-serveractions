@@ -1,7 +1,6 @@
 "use server";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
+import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
@@ -9,7 +8,7 @@ export const createCategory = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     throw new Error("Unauthorized");
@@ -60,7 +59,7 @@ export const updateCategory = async (
   prevState: unknown,
   formData: FormData
 ) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     throw new Error("Unauthorized");
@@ -119,7 +118,7 @@ export const updateCategory = async (
 };
 
 export const getCategories = async () => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     throw new Error("Unauthorized");
@@ -138,7 +137,7 @@ export const getCategories = async () => {
 };
 
 export const getCategoryByIdOrSlug = async (identifier: string) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     throw new Error("Unauthorized");
@@ -158,7 +157,7 @@ export const getCategoryByIdOrSlug = async (identifier: string) => {
 };
 
 export const deleteCategory = async (categoryId: string) => {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     throw new Error("Unauthorized");

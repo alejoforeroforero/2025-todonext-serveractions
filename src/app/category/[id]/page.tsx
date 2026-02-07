@@ -1,5 +1,4 @@
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth-options";
+import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { getTodosByCategoryIdOrSlug } from "@/actions/todo-actions";
 import { getCategoryByIdOrSlug } from "@/actions/category-actions";
@@ -13,7 +12,7 @@ interface CategoryPageProps {
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
 
   if (!session) {
     redirect("/");
