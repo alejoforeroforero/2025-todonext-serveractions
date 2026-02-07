@@ -6,9 +6,9 @@ import { getCategories } from "@/actions/category-actions";
 import { TodoTabs } from "@/components";
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
@@ -18,7 +18,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     redirect("/");
   }
 
-  const categoryIdentifier = params.id;
+  const { id: categoryIdentifier } = await params;
   
   // Fetch the specific category, todos for this category, and all categories
   const [currentCategory, todos, categories] = await Promise.all([
